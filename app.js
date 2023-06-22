@@ -38,7 +38,7 @@ app.post("/register/", async (request, response) => {
     WHERE username = '${username}';`;
   const dbUser = await db.get(selectUserQuery);
   if (dbUser === undefined) {
-    const createUserQuery = `
+    let createUserQuery = `
         INSERT INTO
             user( username, name, password, gender, location)
         VALUES
@@ -49,11 +49,13 @@ app.post("/register/", async (request, response) => {
                 '${gender}',
                 '${location}'
             );`;
-    await db.run(createUserQuery);
-    response.send("User created successfully");
-  } else if (password.length < 5) {
-    response.status(400);
-    response.send("Password is too short");
+    if (password.length < 5) {
+      response.status(400);
+      response.send("Password is too short");
+    } else {
+      let newUserDetails = await db.run(createUserQuery);
+      response.send("User created successfully");
+    }
   } else {
     response.status(400);
     response.send("User already exists");

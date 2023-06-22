@@ -2,10 +2,10 @@ POST http://localhost:3000/register/
 Content-Type: application/json
 
 {
-    "username": "hema_gadi",
-    "name": "Hema Gadi",
-    "password": "hema_123",
-    "gender": "Female",
+    "username": "choksha_bokkasam",
+    "name": "Choksha B",
+    "password": "choksha_123",
+    "gender": "Male",
     "location": "Bangalore"
 }
 
